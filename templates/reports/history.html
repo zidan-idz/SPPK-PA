@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="max-w-7xl mx-auto">
-    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-8">
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 sm:p-8">
         <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
             <div class="flex items-center">
                 <i class="fas fa-history text-gray-700 text-2xl mr-3"></i>
@@ -37,7 +37,7 @@
         {% if diagnoses %}
         <div class="space-y-4">
             {% for diagnosis in diagnoses %}
-            <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
+            <div class="border border-gray-200 rounded-lg p-5 sm:p-6 hover:shadow-md transition">
                 <div class="flex items-start justify-between mb-4">
                     <div class="flex-grow">
                         <h3 class="text-lg font-semibold text-gray-900 mb-1">
