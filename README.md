@@ -65,27 +65,34 @@
 ## ❓ Q&A (Tanya Jawab & Panduan)
 
 **Q: Apa fungsi utama aplikasi ini?**
+
 A: Aplikasi ini berfungsi sebagai alat bantu (screening) bagi guru BK atau psikolog sekolah untuk mendeteksi potensi masalah psikologis pada siswa. Sistem menggunakan basis pengetahuan pakar (Expert System) dengan metode Forward Chaining.
 
 **Q: Bagaimana cara login dan menggunakan sistem?**
+
 A: Gunakan **username** dan **password** akun superuser yang telah Anda buat pada tahap instalasi (Langkah 5).
 *(Jika belum punya, buat via terminal: `python manage.py createsuperuser`)*
 
 Setelah login, masuk ke **Menu Siswa** untuk input data, lalu ke **Menu Diagnosis** untuk memulai penilaian.
 
 **Q: Bagaimana cara mengubah Knowledge Base (Gejala/Penyakit)?**
+
 A: Sistem ini dinamis. Login ke aplikasi, lalu akses URL `/admin` (panel admin Django). Di sana Anda bisa menambah/edit/hapus Conditions (Penyakit), Symptoms (Gejala), dan Rules (Aturan).
 
 **Q: Apakah data aman dan bisa di-backup?**
+
 A: Secara default menggunakan database `db.sqlite3` lokal. Untuk backup, cukup copy file tersebut. Untuk produksi, disarankan menggunakan PostgreSQL/MySQL.
 
 **Q: Mengapa muncul "No module named..." saat instalasi?**
+
 A: Pastikan virtual environment aktif sebelum `pip install`. Coba juga update pip: `python -m pip install --upgrade pip`.
 
 **Q: Apakah aplikasi ini responsif di HP?**
+
 A: Ya! SPPK-PA dibuat untuk sepenuhnya responsif di HP, Tablet, dan Laptop dengan menggunakan Tailwind CSS.
 
 **Q: Lupa password admin, bagaimana cara reset?**
+
 A: Reset via terminal: `python manage.py changepassword username_anda`.
 
 ---
