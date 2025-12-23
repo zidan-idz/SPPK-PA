@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Beranda - Sistem Pakar{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto">
+    <!-- Welcome Section -->
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 sm:p-8 mb-6 sm:mb-8">
+        <h1 class="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">
+            Selamat Datang, {{ user.get_full_name|default:user.username }}
+        </h1>
+        <p class="text-sm sm:text-base text-gray-600">
+            Sistem Pakar Pendukung Keputusan untuk Penilaian Kondisi Psikologis Anak
+        </p>
+    </div>
+
+    <!-- Important Notice -->
+    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 sm:p-6 mb-6 sm:mb-8 rounded-r">
+        <div class="flex items-start">
+            <i class="fas fa-exclamation-triangle text-amber-600 text-lg sm:text-xl mt-0.5 mr-3 flex-shrink-0"></i>
+            <div>
+                <p class="font-semibold text-amber-900 mb-1 text-sm sm:text-base">Disclaimer</p>
+                <p class="text-xs sm:text-sm text-amber-800 leading-relaxed">
+                    Sistem ini adalah Decision Support System (DSS), bukan alat diagnosis medis.
+                    Hasil yang ditampilkan hanya sebagai indikasi awal yang memerlukan
+                    verifikasi dan konsultasi dengan psikolog profesional.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <a href="{% url 'expert:student_list' %}"
+            class="group bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-3 sm:mb-4">
+                <div
+                    class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition">
+                    <i class="fas fa-users text-blue-600 text-xl"></i>
+                </div>
+            </div>
+            <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-1">Daftar Siswa</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Lihat dan pilih siswa untuk diagnosis</p>
+        </a>
+
+        <a href="{% url 'expert:diagnose' %}"
+            class="group bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-3 sm:mb-4">
+                <div
+                    class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200 transition">
+                    <i class="fas fa-stethoscope text-green-600 text-xl"></i>
+                </div>
+            </div>
+            <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-1">Mulai Diagnosis</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Lakukan penilaian kondisi psikologis</p>
+        </a>
+
+        <a href="{% url 'reports:dashboard' %}"
+            class="group bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-3 sm:mb-4">
+                <div
+                    class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition">
+                    <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                </div>
+            </div>
+            <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-1">Dashboard</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Lihat statistik dan analisis</p>
+        </a>
+
+        <a href="{% url 'reports:history' %}"
+            class="group bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-3 sm:mb-4">
+                <div
+                    class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition">
+                    <i class="fas fa-history text-orange-600 text-xl"></i>
+                </div>
+            </div>
+            <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-1">Riwayat</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Lihat history diagnosis sebelumnya</p>
+        </a>
+    </div>
+
+    <!-- How It Works -->
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 sm:p-8">
+        <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">
+            Cara Menggunakan Sistem
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+            <div class="text-center">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <span class="text-base sm:text-lg font-semibold text-gray-700">1</span>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Pilih Siswa</h3>
+                <p class="text-xs sm:text-sm text-gray-600">Pilih siswa dari daftar atau langsung ke form diagnosis</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <span class="text-base sm:text-lg font-semibold text-gray-700">2</span>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Pilih Gejala</h3>
+                <p class="text-xs sm:text-sm text-gray-600">Centang semua gejala yang Anda amati pada anak</p>
+            </div>
+            <div class="text-center">
+                <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <span class="text-base sm:text-lg font-semibold text-gray-700">3</span>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2 text-sm sm:text-base">Lihat Hasil</h3>
+                <p class="text-xs sm:text-sm text-gray-600">Sistem akan menampilkan kondisi terdeteksi dan saran
+                    penanganan</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

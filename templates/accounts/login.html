@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Sistem Pakar{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 -mt-8 -mb-8 -mx-6">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 m-4">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-md mb-4">
+                <span class="text-2xl font-bold text-blue-600">SP</span>
+            </div>
+            <h1 class="text-2xl font-bold text-gray-900">SPPK-PA</h1>
+            <p class="text-gray-500 text-sm mt-1">Sistem Pakar Pendukung Keputusan</p>
+        </div>
+
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+
+            <div>
+                <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    Username
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                        class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        placeholder="Masukkan username" required autofocus>
+                </div>
+            </div>
+
+            <div>
+                <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                    Password
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </div>
+                    <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+                        class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                        placeholder="Masukkan password" required>
+                </div>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-4 rounded-md transition duration-200 shadow-sm hover:shadow-md">
+                Login
+            </button>
+        </form>
+
+        <div class="mt-6 text-center text-xs text-gray-500">
+            <p>Untuk akses admin, gunakan kredensial superuser</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

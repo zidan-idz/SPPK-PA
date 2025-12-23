@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}Riwayat Diagnosis - Sistem Pakar{% endblock %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto">
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-8">
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
+            <div class="flex items-center">
+                <i class="fas fa-history text-gray-700 text-2xl mr-3"></i>
+                <h2 class="text-2xl font-semibold text-gray-900">
+                    Riwayat Diagnosis
+                    {% if student %}
+                    <span class="text-blue-600">- {{ student.full_name }}</span>
+                    {% endif %}
+                </h2>
+            </div>
+            <a href="{% url 'expert:diagnose' %}"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition text-sm">
+                <i class="fas fa-plus mr-2"></i>Diagnosis Baru
+            </a>
+        </div>
+
+        {% if student %}
+        <div class="mb-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+            <p class="text-sm text-blue-900">
+                Menampilkan riwayat diagnosis untuk: <strong>{{ student.full_name }}</strong> ({{ student.nis }}) - {{
+                student.class_name }}
+            </p>
+            <a href="{% url 'reports:history' %}" class="text-blue-600 hover:text-blue-800 text-xs mt-2 inline-block">
+                <i class="fas fa-arrow-left mr-1"></i>Lihat Semua Riwayat
+            </a>
+        </div>
+        {% endif %}
+
+        {% if diagnoses %}
+        <div class="space-y-4">
+            {% for diagnosis in diagnoses %}
+            <div class="border border-gray-200 rounded-lg p-6 hover:shadow-md transition">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex-grow">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-1">
+                            {{ diagnosis.student.full_name }}
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            {{ diagnosis.student.nis }} - {{ diagnosis.student.class_name }}
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs text-gray-500">{{ diagnosis.created_at|date:"d F Y" }}</p>
+                        <p class="text-xs text-gray-400">{{ diagnosis.created_at|date:"H:i" }} WIB</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <p class="text-xs font-semibold text-gray-600 mb-2 uppercase">Gejala yang Dipilih:</p>
+                        <div class="bg-gray-50 border border-gray-200 p-3 rounded max-h-32 overflow-y-auto">
+                            <ul class="text-xs text-gray-700 space-y-1">
+                                {% for symptom in diagnosis.symptoms.all %}
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-blue-600 text-xs mr-2 mt-1"></i>
+                                    <span>{{ symptom.description }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-xs font-semibold text-gray-600 mb-2 uppercase">Kondisi Terdeteksi:</p>
+                        {% if diagnosis.conditions.all %}
+                        <div class="space-y-2">
+                            {% for condition in diagnosis.conditions.all %}
+                            <div class="bg-red-50 border-l-4 border-red-500 p-3 rounded-r">
+                                <p class="font-semibold text-red-900 text-sm">{{ condition.name }}</p>
+                                <p class="text-xs text-red-600">{{ condition.code }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-gray-500 text-xs">Tidak ada kondisi terdeteksi</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% if diagnosis.notes %}
+                <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-r mb-4">
+                    <p class="text-xs font-semibold text-amber-900 mb-1">Catatan:</p>
+                    <p class="text-xs text-amber-800">{{ diagnosis.notes }}</p>
+                </div>
+                {% endif %}
+
+                <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <p class="text-xs text-gray-500">
+                        Didiagnosis oleh:
+                        <strong>{{ diagnosis.diagnosed_by.username }}</strong>
+                    </p>
+                    <a href="{% url 'reports:detail' diagnosis.id %}"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition text-xs">
+                        Lihat Detail <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-16 text-gray-500">
+            <i class="fas fa-inbox text-5xl mb-4 text-gray-300"></i>
+            <p class="text-lg mb-2">Belum ada riwayat diagnosis</p>
+            <p class="text-sm text-gray-400 mb-6">Mulai diagnosis untuk melihat riwayat</p>
+            <a href="{% url 'expert:diagnose' %}"
+                class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-6 rounded-lg transition">
+                <i class="fas fa-plus mr-2"></i>Mulai Diagnosis
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
